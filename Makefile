@@ -51,6 +51,6 @@ update:
 deploy:
 	mkdocs gh-deploy
 build:
-	mkdocs gh-deploy
+	mkdocs build
 serve:
 	mkdocs serve
