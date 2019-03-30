@@ -200,7 +200,7 @@ It's also possible to run the next command depending on the exit value by using 
 ``` bash
 command1 && command2
 ```
-`command2` is executed if, and only if, `command1` **returns an exit status of zero (success).**
+`command2` is executed if, and only if, `command1` **returns an exits status of zero (success).**
 
 ``` bash
 command1 || command2
@@ -247,7 +247,6 @@ server.listen(port, hostname, () => {
 ```
 
 It is possible to the a script to use a specific version of a interpreter like the python example, or let the environment decided (node js example) which interpreter will be used (usualy, its the first found in the _$PATH_ variable), the latter is the best practice.
-
 
 
 ## Condicionals
