@@ -51,7 +51,7 @@ echo "The value of MY_VAR is $MY_VAR"
 Using  `export` in front of a variable makes the variable available to sub-processes. This variables, also call Environment Variables
 
 ``` bash
-export JAVA_HOME:/opt/java
+export JAVA_HOME=/opt/java
 ```
 
 Variables are always expanded before running the command (step 4, of Shell Operation)
