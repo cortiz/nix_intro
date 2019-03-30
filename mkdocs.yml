@@ -1,0 +1,38 @@
+#theme: rtd-dropdown
+theme:
+    #name: 'bootstrap386'
+    name: 'material'
+site_name: Rivetlogic introduccion to *nix subsystems.
+markdown_extensions:
+        - smarty
+        - toc
+        - codehilite
+        - admonition 
+nav:
+    - Shell: shell/shell.md 
+    - Common:
+        - 'alias': cmds/common/alias.md
+        - 'cat': cmds/common/cat.md
+        - 'cd': cmds/common/cd.md
+        - 'clear': cmds/common/clear.md
+        - 'cp': cmds/common/cp.md
+        - 'date': cmds/common/date.md
+        - 'echo': cmds/common/echo.md
+        - 'grep': cmds/common/grep.md
+        - 'head': cmds/common/head.md
+        - 'history': cmds/common/history.md
+        - 'killall': cmds/common/killall.md
+        - 'kill': cmds/common/kill.md
+        - 'less': cmds/common/less.md
+        - 'ls': cmds/common/ls.md
+        - 'man': cmds/common/man.md
+        - 'mkdir': cmds/common/mkdir.md
+        - 'more': cmds/common/more.md
+        - 'mv': cmds/common/mv.md
+        - 'pwd': cmds/common/pwd.md
+        - 'rmdir': cmds/common/rmdir.md
+        - 'rm': cmds/common/rm.md
+        - 'tail': cmds/common/tail.md
+        - 'touch': cmds/common/touch.md
+    - Filesystem: fs/index.md
+
