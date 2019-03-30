@@ -75,6 +75,90 @@ This change can done to a current shell session or make it permanent by adding t
 export PATH=/my/bin/location:$PATH
 ```
 
+# Pattern Matching
+
+Also known as globbing or glob, is a term used to describe the expansion or the match of values returned when using wildcards, regular expressions, or other pattern matches. 
+The special pattern characters (or wildcards) have the following meanings:
+ 
+* `*` Matches any string, including the null string. 
+* `?`  Matches any single character. 
+* `[…]` Matches any one of the enclosed characters. A pair of characters separated by a hyphen denotes a range expression; 
+* `?(pattern-list)` Matches zero or one occurrence of the given patterns.
+* `*(pattern-list)` Matches zero or more occurrences of the given patterns.
+* `+(pattern-list)` Matches one or more occurrences of the given patterns.
+* `@(pattern-list)` Matches one of the given patterns.
+* `!(pattern-list)` Matches anything except one of the given patterns. 
+
+Examples:
+
+```bash
+ls *.jar
+```
+```bash
+ls ch[e]*
+```
+
+## Shell Expansions
+
+An expansion is performed on the command line after it has been split into tokens. There are seven kinds of expansion performed:
+
+* brace expansion Brace expansion is a mechanism by which arbitrary strings may be generated. 
+
+``` bash
+echo a{d,c,b}e
+```
+
+* tilde expansion The tilde (~) may be used to refer your own home directory or other users home directory.
+
+	* If the tilde-prefix is a ~+, the value of the shell variable PWD replaces the tilde-prefix
+	* If the tilde-prefix is a ~-, the value of the shell variable OLDPWD, if it is set, is substituted.
+
+``` bash
+ls ~
+```
+
+```bash
+cd /etc
+pwd
+cd /bin
+pwd
+echo $OLDPWD
+# display /etc/ directory listing and not /bin
+ls ~-
+``` 
+
+* parameter and variable expansion The ‘$’ character introduces parameter expansion, command substitution, or arithmetic expansion. 
+
+``` bash
+string=01234567890abcdefgh
+echo ${string:7}
+echo ${string: -7:2}
+```
+* ommand substitution allows the output of a command to replace the command itself.
+```bash
+$(command)
+`command`
+```
+
+* arithmetic expansion allows the evaluation of an arithmetic expression and the substitution of the result.
+```bash
+$(( expression ))
+```
+
+* process substitution allows a process’s input or output to be referred to using a filename. 
+
+```bash
+<(list)
+>(list)
+```
+
+* word splitting The shell scans the results of parameter expansion, command substitution, 
+ and arithmetic expansion that did not occur within double quotes for word splitting. 
+
+* [filename expansion](#pattern-matching)
+
+
+
 # Alias
 
 An alias is a keyboard shortcut, an abbreviation to avoiding typing a long command sequence
@@ -82,7 +166,7 @@ An alias is a keyboard shortcut, an abbreviation to avoiding typing a long comma
 ``` bash
 alias la=ls -alh
 ```
-The command-line will automatically be replaced by `la` with `ls -alh` 
+The command-line will automatically be replaced `la` with `ls -alh` 
 Aliases can be set by shell session or, permanent by adding them in the shell initialization script.
 
 Aliases can be named same as commands, this aliases will take priority over the actual command regardless of its position 
@@ -251,6 +335,247 @@ It is possible to the a script to use a specific version of a interpreter like t
 
 ## Condicionals
 
+### If,else & If else
+
+The _test-commands_ list is executed, and if its return status is zero, the consequent-commands list is executed.
+
+* If
+
+``` bash
+if [ test-commands  ]; then
+	<commands>
+fi
+```
+* If else
+
+``` bash
+if [ test-commands  ]
+then
+<commands>
+else
+<other commands>
+fi
+```
+
+* If else if else
+
+``` bash
+if [ test-commands  ]
+then
+<commands>
+elif [ test-commands ]
+then
+<different commands>
+else
+<other commands>
+fi
+```
+
+
+Test Expressions 
+
+* ! EXPRESSION     The EXPRESSION is false.
+* -n STRING     The length of STRING is greater than zero.
+* -z STRING     The lengh of STRING is zero (ie it is empty).
+* STRING1 = STRING2     STRING1 is equal to STRING2
+* STRING1 != STRING2     STRING1 is not equal to STRING2
+* INTEGER1 -eq INTEGER2     INTEGER1 is numerically equal to INTEGER2
+* INTEGER1 -gt INTEGER2     INTEGER1 is numerically greater than INTEGER2
+* INTEGER1 -lt INTEGER2     INTEGER1 is numerically less than INTEGER2
+* INTEGER1 -ge INTEGER2     INTEGER1 is numerically greater or equal than INTEGER2
+* INTEGER1 -le INTEGER2     INTEGER1 is numerically less or equal than INTEGER2
+* -d FILE     FILE exists and is a directory.
+* -e FILE     FILE exists.
+* -r FILE     FILE exists and the read permission is granted.
+* -s FILE     FILE exists and it's size is greater than zero (ie. it is not empty).
+* -w FILE     FILE exists and the write permission is granted.
+* -x FILE     FILE exists and the execute permission is granted.
+
+### Examples
+```bash
+if [ $value -eq 1 ]
+then
+  echo "has value"
+fi
+```
+
+```bash
+my_file="myfile.txt"
+
+if [ -s $my_file ]
+then
+  cat $my_file
+else
+  echo "File not found"
+fi
+
+```
+
+```bash
+my_var=2
+
+if [ $my_var -gt 0 ]
+then
+  echo "More than 2"
+elif [ $my_var -lt 0 ]
+then
+	echo "it's negative"
+else
+  echo "it's zero"
+fi
+
+```
+
+### Case
+
+`case` will selectively execute the command-list corresponding to the first pattern that matches the word.
+
+``` bash
+case <variable> in
+<pattern 1>)
+	commands
+;;
+<pattern 2>)
+	other_command
+;;
+	*)
+	 defautl_command
+	;;
+esac
+```
+
+```bash
+case $action in
+	start)
+		echo starting
+	;;
+	stop)
+		echo stoping
+	;;
+	restart)
+		echo restarting
+	;;
+	*)
+		echo don\'t know
+	;;
+esac
+```
+
+
 ## Loops
 
+* `until` Execute consequent-commands as long as test-commands has an exit status which is not zero.
+```bash
+until test-commands; do consequent-commands; done
+```
+
+``` bash
+count=1
+until [ $count -gt 5 ]
+do
+   printf "Count has a value of $count\n"
+  ((count++))
+done
+```
+
+* `while` Execute consequent-commands as long as test-commands has an exit status of zero. 
+``` bash
+while test-commands; do consequent-commands; don
+```
+
+``` bash
+i="0"
+while [ $i -lt 4 ]
+do
+	echo "$i"
+	i=$[$i+1]
+done
+```
+* `for` Expand words (see Shell Expansions), and execute commands once for each member in the resultant list, with `name` bound to the current member (as internal loop variable $name)
+``` bash
+for name [ [in [words …] ] ; ] do commands; done
+```
+
+``` bash
+for (( expr1 ; expr2 ; expr3 )) ; do commands ; done
+```
+
+```bash
+for file in $(ls); do 
+	echo "File is $file";
+ done
+```
+
 ## Functions
+A function is essentially a set of commands that can be called numerous times. The purpose of a function is to help you make your bash scripts more readable and to avoid writing the same code over and over again.
+
+``` bash
+function_name () {
+  commands
+}
+```
+
+``` bash
+function function_name {
+  commands
+}
+```
+
+Variables can also have, the same name as commands, like an alias, this will always take precedence over the actual command. 
+
+Since all shell scripts are interpreted, functions must be declared, before using them.
+
+### Variables Scope
+Global variables are variables that can be accessed from anywhere in the script regardless of the scope.  All variables by default are defined as global, even if declared inside the function.
+
+Local variables can be declared within the function body with the _local_ keyword and can be used only inside that function.
+
+``` bash
+#!/bin/bash
+
+var1='A'
+var2='B'
+
+my_function () {
+  local var1='C'
+  var2='D'
+  echo "Inside function: var1: $var1, var2: $var2"
+}
+echo "Before executing function: var1: $var1, var2: $var2"
+
+my_function
+
+echo "After executing function: var1: $var1, var2: $var2"
+```
+
+### Return Values
+When a  function completes, its return value is the status of the last statement executed in the function
+
+```bash
+my_function () {
+  echo "some result"
+  return 55
+}
+my_function
+echo $?
+```
+
+### Arguments
+
+To pass any number of arguments to the bash function simply put them right after the function’s name *It is a best practice to double quote the arguments*
+
+*The passed parameters are `$1`, `$2`, `$3` … `$n`, corresponding to the position of the parameter after the function’s name.,
+
+* The `$0` variable is reserved for the function’s name.
+
+* The``$#` variable holds the number of positional parameters/arguments passed to the function.
+
+* The `$*` or `$@` variable holds all positional parameters/arguments passed to the function.
+
+```bash
+greeting () {
+  echo "Hello $1"
+}
+
+greeting "Joe"
+```
