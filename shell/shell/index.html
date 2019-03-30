@@ -534,14 +534,28 @@ and is used by the operating system to control the execution of the system using
 <li><a href="#path">$PATH</a></li>
 </ul>
 </li>
+<li><a href="#pattern-matching">Pattern Matching</a><ul>
+<li><a href="#shell-expansions">Shell Expansions</a></li>
+</ul>
+</li>
 <li><a href="#alias">Alias</a></li>
 <li><a href="#exit-status">Exit Status</a></li>
 <li><a href="#pipes-and-redirections">Pipes and Redirections</a></li>
 <li><a href="#lists-of-commands">Lists of Commands</a></li>
 <li><a href="#shell-scripts">Shell Scripts</a><ul>
-<li><a href="#condicionals">Condicionals</a></li>
+<li><a href="#condicionals">Condicionals</a><ul>
+<li><a href="#ifelse-if-else">If,else &amp; If else</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#case">Case</a></li>
+</ul>
+</li>
 <li><a href="#loops">Loops</a></li>
-<li><a href="#functions">Functions</a></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#variables-scope">Variables Scope</a></li>
+<li><a href="#return-values">Return Values</a></li>
+<li><a href="#arguments">Arguments</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -602,13 +616,108 @@ This change can done to a current shell session or make it permanent by adding t
 </pre></div>
 
 
+<h1 id="pattern-matching">Pattern Matching</h1>
+<p>Also known as globbing or glob, is a term used to describe the expansion or the match of values returned when using wildcards, regular expressions, or other pattern matches. 
+The special pattern characters (or wildcards) have the following meanings:</p>
+<ul>
+<li><code>*</code> Matches any string, including the null string. </li>
+<li><code>?</code>  Matches any single character. </li>
+<li><code>[…]</code> Matches any one of the enclosed characters. A pair of characters separated by a hyphen denotes a range expression; </li>
+<li><code>?(pattern-list)</code> Matches zero or one occurrence of the given patterns.</li>
+<li><code>*(pattern-list)</code> Matches zero or more occurrences of the given patterns.</li>
+<li><code>+(pattern-list)</code> Matches one or more occurrences of the given patterns.</li>
+<li><code>@(pattern-list)</code> Matches one of the given patterns.</li>
+<li><code>!(pattern-list)</code> Matches anything except one of the given patterns. </li>
+</ul>
+<p>Examples:</p>
+<div class="codehilite"><pre><span></span>ls *.jar
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>ls ch<span class="o">[</span>e<span class="o">]</span>*
+</pre></div>
+
+
+<h2 id="shell-expansions">Shell Expansions</h2>
+<p>An expansion is performed on the command line after it has been split into tokens. There are seven kinds of expansion performed:</p>
+<ul>
+<li>brace expansion Brace expansion is a mechanism by which arbitrary strings may be generated. </li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nb">echo</span> a<span class="o">{</span>d,c,b<span class="o">}</span>e
+</pre></div>
+
+
+<ul>
+<li>
+<p>tilde expansion The tilde (~) may be used to refer your own home directory or other users home directory.</p>
+<ul>
+<li>If the tilde-prefix is a ~+, the value of the shell variable PWD replaces the tilde-prefix</li>
+<li>If the tilde-prefix is a ~-, the value of the shell variable OLDPWD, if it is set, is substituted.</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite"><pre><span></span>ls ~
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="nb">cd</span> /etc
+<span class="nb">pwd</span>
+<span class="nb">cd</span> /bin
+<span class="nb">pwd</span>
+<span class="nb">echo</span> <span class="nv">$OLDPWD</span>
+<span class="c1"># display /etc/ directory listing and not /bin</span>
+ls ~-
+</pre></div>
+
+
+<ul>
+<li>parameter and variable expansion The ‘$’ character introduces parameter expansion, command substitution, or arithmetic expansion. </li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nv">string</span><span class="o">=</span>01234567890abcdefgh
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">string</span><span class="p">:</span><span class="nv">7</span><span class="si">}</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">string</span><span class="p">: -7:</span><span class="nv">2</span><span class="si">}</span>
+</pre></div>
+
+
+<ul>
+<li>ommand substitution allows the output of a command to replace the command itself.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">$(</span><span class="nb">command</span><span class="k">)</span>
+<span class="sb">`</span><span class="nb">command</span><span class="sb">`</span>
+</pre></div>
+
+
+<ul>
+<li>arithmetic expansion allows the evaluation of an arithmetic expression and the substitution of the result.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">$((</span> expression <span class="k">))</span>
+</pre></div>
+
+
+<ul>
+<li>process substitution allows a process’s input or output to be referred to using a filename. </li>
+</ul>
+<div class="codehilite"><pre><span></span>&lt;<span class="o">(</span>list<span class="o">)</span>
+&gt;<span class="o">(</span>list<span class="o">)</span>
+</pre></div>
+
+
+<ul>
+<li>
+<p>word splitting The shell scans the results of parameter expansion, command substitution, 
+ and arithmetic expansion that did not occur within double quotes for word splitting. </p>
+</li>
+<li>
+<p><a href="#pattern-matching">filename expansion</a></p>
+</li>
+</ul>
 <h1 id="alias">Alias</h1>
 <p>An alias is a keyboard shortcut, an abbreviation to avoiding typing a long command sequence</p>
 <div class="codehilite"><pre><span></span><span class="nb">alias</span> <span class="nv">la</span><span class="o">=</span>ls -alh
 </pre></div>
 
 
-<p>The command-line will automatically be replaced by <code>la</code> with <code>ls -alh</code> 
+<p>The command-line will automatically be replaced <code>la</code> with <code>ls -alh</code> 
 Aliases can be set by shell session or, permanent by adding them in the shell initialization script.</p>
 <p>Aliases can be named same as commands, this aliases will take priority over the actual command regardless of its position 
 in the <em>$PATH</em> variable this is useful when, we want to add default arguments and options to the command, for example</p>
@@ -740,8 +849,247 @@ server.listen<span class="o">(</span>port, hostname, <span class="o">()</span> <
 
 <p>It is possible to the a script to use a specific version of a interpreter like the python example, or let the environment decided (node js example) which interpreter will be used (usualy, its the first found in the <em>$PATH</em> variable), the latter is the best practice.</p>
 <h2 id="condicionals">Condicionals</h2>
+<h3 id="ifelse-if-else">If,else &amp; If else</h3>
+<p>The <em>test-commands</em> list is executed, and if its return status is zero, the consequent-commands list is executed.</p>
+<ul>
+<li>If</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">if</span> <span class="o">[</span> test-commands  <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    &lt;commands&gt;
+<span class="k">fi</span>
+</pre></div>
+
+
+<ul>
+<li>If else</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">if</span> <span class="o">[</span> test-commands  <span class="o">]</span>
+<span class="k">then</span>
+&lt;commands&gt;
+<span class="k">else</span>
+&lt;other commands&gt;
+<span class="k">fi</span>
+</pre></div>
+
+
+<ul>
+<li>If else if else</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">if</span> <span class="o">[</span> test-commands  <span class="o">]</span>
+<span class="k">then</span>
+&lt;commands&gt;
+<span class="k">elif</span> <span class="o">[</span> test-commands <span class="o">]</span>
+<span class="k">then</span>
+&lt;different commands&gt;
+<span class="k">else</span>
+&lt;other commands&gt;
+<span class="k">fi</span>
+</pre></div>
+
+
+<p>Test Expressions </p>
+<ul>
+<li>! EXPRESSION     The EXPRESSION is false.</li>
+<li>-n STRING     The length of STRING is greater than zero.</li>
+<li>-z STRING     The lengh of STRING is zero (ie it is empty).</li>
+<li>STRING1 = STRING2     STRING1 is equal to STRING2</li>
+<li>STRING1 != STRING2     STRING1 is not equal to STRING2</li>
+<li>INTEGER1 -eq INTEGER2     INTEGER1 is numerically equal to INTEGER2</li>
+<li>INTEGER1 -gt INTEGER2     INTEGER1 is numerically greater than INTEGER2</li>
+<li>INTEGER1 -lt INTEGER2     INTEGER1 is numerically less than INTEGER2</li>
+<li>INTEGER1 -ge INTEGER2     INTEGER1 is numerically greater or equal than INTEGER2</li>
+<li>INTEGER1 -le INTEGER2     INTEGER1 is numerically less or equal than INTEGER2</li>
+<li>-d FILE     FILE exists and is a directory.</li>
+<li>-e FILE     FILE exists.</li>
+<li>-r FILE     FILE exists and the read permission is granted.</li>
+<li>-s FILE     FILE exists and it&rsquo;s size is greater than zero (ie. it is not empty).</li>
+<li>-w FILE     FILE exists and the write permission is granted.</li>
+<li>-x FILE     FILE exists and the execute permission is granted.</li>
+</ul>
+<h3 id="examples">Examples</h3>
+<div class="codehilite"><pre><span></span><span class="k">if</span> <span class="o">[</span> <span class="nv">$value</span> -eq <span class="m">1</span> <span class="o">]</span>
+<span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;has value&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="nv">my_file</span><span class="o">=</span><span class="s2">&quot;myfile.txt&quot;</span>
+
+<span class="k">if</span> <span class="o">[</span> -s <span class="nv">$my_file</span> <span class="o">]</span>
+<span class="k">then</span>
+  cat <span class="nv">$my_file</span>
+<span class="k">else</span>
+  <span class="nb">echo</span> <span class="s2">&quot;File not found&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="nv">my_var</span><span class="o">=</span><span class="m">2</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$my_var</span> -gt <span class="m">0</span> <span class="o">]</span>
+<span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;More than 2&quot;</span>
+<span class="k">elif</span> <span class="o">[</span> <span class="nv">$my_var</span> -lt <span class="m">0</span> <span class="o">]</span>
+<span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;it&#39;s negative&quot;</span>
+<span class="k">else</span>
+  <span class="nb">echo</span> <span class="s2">&quot;it&#39;s zero&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+
+
+<h3 id="case">Case</h3>
+<p><code>case</code> will selectively execute the command-list corresponding to the first pattern that matches the word.</p>
+<div class="codehilite"><pre><span></span><span class="k">case</span> &lt;variable&gt; in
+&lt;pattern <span class="m">1</span>&gt;<span class="o">)</span>
+    commands
+<span class="p">;;</span>
+&lt;pattern <span class="m">2</span>&gt;<span class="o">)</span>
+    other_command
+<span class="p">;;</span>
+    *<span class="o">)</span>
+     defautl_command
+    <span class="p">;;</span>
+<span class="k">esac</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="k">case</span> <span class="nv">$action</span> in
+    start<span class="o">)</span>
+        <span class="nb">echo</span> starting
+    <span class="p">;;</span>
+    stop<span class="o">)</span>
+        <span class="nb">echo</span> stoping
+    <span class="p">;;</span>
+    restart<span class="o">)</span>
+        <span class="nb">echo</span> restarting
+    <span class="p">;;</span>
+    *<span class="o">)</span>
+        <span class="nb">echo</span> don<span class="se">\&#39;</span>t know
+    <span class="p">;;</span>
+<span class="k">esac</span>
+</pre></div>
+
+
 <h2 id="loops">Loops</h2>
+<ul>
+<li><code>until</code> Execute consequent-commands as long as test-commands has an exit status which is not zero.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">until</span> test-commands<span class="p">;</span> <span class="k">do</span> consequent-commands<span class="p">;</span> <span class="k">done</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="nv">count</span><span class="o">=</span><span class="m">1</span>
+<span class="k">until</span> <span class="o">[</span> <span class="nv">$count</span> -gt <span class="m">5</span> <span class="o">]</span>
+<span class="k">do</span>
+   <span class="nb">printf</span> <span class="s2">&quot;Count has a value of </span><span class="nv">$count</span><span class="s2">\n&quot;</span>
+  <span class="o">((</span>count++<span class="o">))</span>
+<span class="k">done</span>
+</pre></div>
+
+
+<ul>
+<li><code>while</code> Execute consequent-commands as long as test-commands has an exit status of zero. </li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">while</span> test-commands<span class="p">;</span> <span class="k">do</span> consequent-commands<span class="p">;</span> don
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="nv">i</span><span class="o">=</span><span class="s2">&quot;0&quot;</span>
+<span class="k">while</span> <span class="o">[</span> <span class="nv">$i</span> -lt <span class="m">4</span> <span class="o">]</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span>
+    <span class="nv">i</span><span class="o">=</span>$<span class="o">[</span><span class="nv">$i</span>+1<span class="o">]</span>
+<span class="k">done</span>
+</pre></div>
+
+
+<ul>
+<li><code>for</code> Expand words (see Shell Expansions), and execute commands once for each member in the resultant list, with <code>name</code> bound to the current member (as internal loop variable $name)</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="k">for</span> name <span class="o">[</span> <span class="o">[</span>in <span class="o">[</span>words …<span class="o">]</span> <span class="o">]</span> <span class="p">;</span> <span class="o">]</span> <span class="k">do</span> commands<span class="p">;</span> <span class="k">done</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="o">((</span> expr1 <span class="p">;</span> expr2 <span class="p">;</span> expr3 <span class="o">))</span> <span class="p">;</span> <span class="k">do</span> commands <span class="p">;</span> <span class="k">done</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="k">for</span> file in <span class="k">$(</span>ls<span class="k">)</span><span class="p">;</span> <span class="k">do</span> 
+    <span class="nb">echo</span> <span class="s2">&quot;File is </span><span class="nv">$file</span><span class="s2">&quot;</span><span class="p">;</span>
+ <span class="k">done</span>
+</pre></div>
+
+
 <h2 id="functions">Functions</h2>
+<p>A function is essentially a set of commands that can be called numerous times. The purpose of a function is to help you make your bash scripts more readable and to avoid writing the same code over and over again.</p>
+<div class="codehilite"><pre><span></span>function_name <span class="o">()</span> <span class="o">{</span>
+  commands
+<span class="o">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="k">function</span> function_name <span class="o">{</span>
+  commands
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Variables can also have, the same name as commands, like an alias, this will always take precedence over the actual command. </p>
+<p>Since all shell scripts are interpreted, functions must be declared, before using them.</p>
+<h3 id="variables-scope">Variables Scope</h3>
+<p>Global variables are variables that can be accessed from anywhere in the script regardless of the scope.  All variables by default are defined as global, even if declared inside the function.</p>
+<p>Local variables can be declared within the function body with the <em>local</em> keyword and can be used only inside that function.</p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nv">var1</span><span class="o">=</span><span class="s1">&#39;A&#39;</span>
+<span class="nv">var2</span><span class="o">=</span><span class="s1">&#39;B&#39;</span>
+
+my_function <span class="o">()</span> <span class="o">{</span>
+  <span class="nb">local</span> <span class="nv">var1</span><span class="o">=</span><span class="s1">&#39;C&#39;</span>
+  <span class="nv">var2</span><span class="o">=</span><span class="s1">&#39;D&#39;</span>
+  <span class="nb">echo</span> <span class="s2">&quot;Inside function: var1: </span><span class="nv">$var1</span><span class="s2">, var2: </span><span class="nv">$var2</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+<span class="nb">echo</span> <span class="s2">&quot;Before executing function: var1: </span><span class="nv">$var1</span><span class="s2">, var2: </span><span class="nv">$var2</span><span class="s2">&quot;</span>
+
+my_function
+
+<span class="nb">echo</span> <span class="s2">&quot;After executing function: var1: </span><span class="nv">$var1</span><span class="s2">, var2: </span><span class="nv">$var2</span><span class="s2">&quot;</span>
+</pre></div>
+
+
+<h3 id="return-values">Return Values</h3>
+<p>When a  function completes, its return value is the status of the last statement executed in the function</p>
+<div class="codehilite"><pre><span></span>my_function <span class="o">()</span> <span class="o">{</span>
+  <span class="nb">echo</span> <span class="s2">&quot;some result&quot;</span>
+  <span class="k">return</span> <span class="m">55</span>
+<span class="o">}</span>
+my_function
+<span class="nb">echo</span> <span class="nv">$?</span>
+</pre></div>
+
+
+<h3 id="arguments">Arguments</h3>
+<p>To pass any number of arguments to the bash function simply put them right after the function’s name <em>It is a best practice to double quote the arguments</em></p>
+<p>*The passed parameters are <code>$1</code>, <code>$2</code>, <code>$3</code> … <code>$n</code>, corresponding to the position of the parameter after the function’s name.,</p>
+<ul>
+<li>
+<p>The <code>$0</code> variable is reserved for the function’s name.</p>
+</li>
+<li>
+<p>The<code>`$#</code> variable holds the number of positional parameters/arguments passed to the function.</p>
+</li>
+<li>
+<p>The <code>$*</code> or <code>$@</code> variable holds all positional parameters/arguments passed to the function.</p>
+</li>
+</ul>
+<div class="codehilite"><pre><span></span>greeting <span class="o">()</span> <span class="o">{</span>
+  <span class="nb">echo</span> <span class="s2">&quot;Hello </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+greeting <span class="s2">&quot;Joe&quot;</span>
+</pre></div>
                 
                   
                 
