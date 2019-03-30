@@ -84,7 +84,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../fs/" title="Rivetlogic introduccion to *nix subsystems." class="md-header-nav__button md-logo">
+        <a href="../../fs/" title="Rivetlogic introduction to *nix subsystems." class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -97,7 +97,7 @@
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
             <span class="md-header-nav__topic">
-              Rivetlogic introduccion to *nix subsystems.
+              Rivetlogic introduction to *nix subsystems.
             </span>
             <span class="md-header-nav__topic">
               Shell
@@ -152,12 +152,12 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../../fs/" title="Rivetlogic introduccion to *nix subsystems." class="md-nav__button md-logo">
+    <a href="../../fs/" title="Rivetlogic introduction to *nix subsystems." class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
     </a>
-    Rivetlogic introduccion to *nix subsystems.
+    Rivetlogic introduction to *nix subsystems.
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -538,8 +538,12 @@ and is used by the operating system to control the execution of the system using
 <li><a href="#exit-status">Exit Status</a></li>
 <li><a href="#pipes-and-redirections">Pipes and Redirections</a></li>
 <li><a href="#lists-of-commands">Lists of Commands</a></li>
-<li><a href="#tab-completions">Tab Completions</a></li>
-<li><a href="#shell-scripts">Shell Scripts</a></li>
+<li><a href="#shell-scripts">Shell Scripts</a><ul>
+<li><a href="#condicionals">Condicionals</a></li>
+<li><a href="#loops">Loops</a></li>
+<li><a href="#functions">Functions</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <h1 id="shell-operation">Shell Operation</h1>
@@ -702,8 +706,42 @@ the list is made by using <code>;</code> between the commands that we want to ru
 <p><code>command2</code> is executed if, and only if, <code>command1</code> <strong>returns a non-zero exit status.</strong></p>
 <p>The return status of AND and OR lists is the exit status of the last command executed in the list</p>
 <p>‘&amp;&amp;’ and ‘||’ have equal precedence, followed by ‘;’ and ‘&amp;’, which have equal precedence </p>
-<h1 id="tab-completions">Tab Completions</h1>
 <h1 id="shell-scripts">Shell Scripts</h1>
+<p>Shells can also read a file, and execute the commands within the file this file is commonly known as shell scripts. Each shell can have its own syntax for these files, but in this guide, we will use the most common syntax, the <code>sh</code> which is also compatible with <code>zsh</code> shell.</p>
+<p>It&rsquo;s common to add <code>#!</code> as the first line of the scripts, this tells the shell which interpreter should be used to execute the script. <code>#!</code> is also known as <em>shebang</em>  and its <strong>always</strong> followed by the full path of the interpreter that will run the script.</p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin/bash </span>
+<span class="nb">echo</span> <span class="s2">&quot;Hello World&quot;</span>
+</pre></div>
+
+
+<p>This will make our file to be interpreted by bash, it&rsquo;s also possible to use other interpreters like python, ruby,  nodejs and since Java 10, Java.</p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin/python3 </span>
+print<span class="o">(</span><span class="s2">&quot;Hello World&quot;</span><span class="o">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin/env node</span>
+const <span class="nv">http</span> <span class="o">=</span> require<span class="o">(</span><span class="s1">&#39;http&#39;</span><span class="o">)</span><span class="p">;</span>
+
+const <span class="nv">hostname</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">;</span>
+const <span class="nv">port</span> <span class="o">=</span> <span class="m">3000</span><span class="p">;</span>
+
+const <span class="nv">server</span> <span class="o">=</span> http.createServer<span class="o">((</span>req, res<span class="o">)</span> <span class="o">=</span>&gt; <span class="o">{</span>
+  res.statusCode <span class="o">=</span> <span class="m">200</span><span class="p">;</span>
+  res.setHeader<span class="o">(</span><span class="s1">&#39;Content-Type&#39;</span>, <span class="s1">&#39;text/plain&#39;</span><span class="o">)</span><span class="p">;</span>
+  res.end<span class="o">(</span><span class="s1">&#39;Hello World\n&#39;</span><span class="o">)</span><span class="p">;</span>
+<span class="o">})</span><span class="p">;</span>
+
+server.listen<span class="o">(</span>port, hostname, <span class="o">()</span> <span class="o">=</span>&gt; <span class="o">{</span>
+  console.log<span class="o">(</span><span class="sb">`</span>Server running at http://<span class="si">${</span><span class="nv">hostname</span><span class="si">}</span>:<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/<span class="sb">`</span><span class="o">)</span><span class="p">;</span>
+<span class="o">})</span><span class="p">;</span>
+</pre></div>
+
+
+<p>It is possible to the a script to use a specific version of a interpreter like the python example, or let the environment decided (node js example) which interpreter will be used (usualy, its the first found in the <em>$PATH</em> variable), the latter is the best practice.</p>
+<h2 id="condicionals">Condicionals</h2>
+<h2 id="loops">Loops</h2>
+<h2 id="functions">Functions</h2>
                 
                   
                 
