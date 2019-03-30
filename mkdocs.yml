@@ -2,7 +2,7 @@
 theme:
     #name: 'bootstrap386'
     name: 'material'
-site_name: Rivetlogic introduccion to *nix subsystems.
+site_name: Rivetlogic introduction to *nix subsystems.
 markdown_extensions:
         - smarty
         - toc

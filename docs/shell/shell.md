@@ -212,7 +212,46 @@ The return status of AND and OR lists is the exit status of the last command exe
 
 ‘&&’ and ‘||’ have equal precedence, followed by ‘;’ and ‘&’, which have equal precedence 
 
-
-# Tab Completions
-
 # Shell Scripts
+Shells can also read a file, and execute the commands within the file this file is commonly known as shell scripts. Each shell can have its own syntax for these files, but in this guide, we will use the most common syntax, the `sh` which is also compatible with `zsh` shell.
+
+It's common to add `#!` as the first line of the scripts, this tells the shell which interpreter should be used to execute the script. `#!` is also known as _shebang_  and its **always** followed by the full path of the interpreter that will run the script.
+
+``` bash 
+#!/usr/bin/bash 
+echo "Hello World"
+```
+This will make our file to be interpreted by bash, it's also possible to use other interpreters like python, ruby,  nodejs and since Java 10, Java.
+
+``` bash
+#!/usr/bin/python3 
+print("Hello World")
+```
+
+``` bash
+#!/usr/bin/env node
+const http = require('http');
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World\n');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+```
+
+It is possible to the a script to use a specific version of a interpreter like the python example, or let the environment decided (node js example) which interpreter will be used (usualy, its the first found in the _$PATH_ variable), the latter is the best practice.
+
+
+
+## Condicionals
+
+## Loops
+
+## Functions
