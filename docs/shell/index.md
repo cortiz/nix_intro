@@ -3,15 +3,15 @@ Summary: What is nix shell.
 Authors: Carlos Ortiz
 Date:    March 29, 2019
 
+# The Shell
 
 Unix shell is a command-line interpreter or shell that provides a command line user interface for 
 Unix-like operating systems. 
 The shell is both an interactive command language and a scripting language, 
 and is used by the operating system to control the execution of the system using shell scripts.
 
-[TOC]
-
 # Shell Operation
+
 The following is a brief description of the shell’s operation when it reads and executes a command.
 Basically, the shell does the following:
 
@@ -29,6 +29,7 @@ Basically, the shell does the following:
 
 
 # Variables
+
 As in any other programming language, the shell has variables, these variables do not have any datatype as they can store a number, a character, a string of characters or lists. All variables are global to the current shell session (but not to a sub-process) 
 The standard practice is that variables are always in uppercase, but there is no technical reason why they can't be in lowercase.
 
@@ -109,9 +110,9 @@ echo a{d,c,b}e
 ```
 
 * tilde expansion The tilde (~) may be used to refer your own home directory or other users home directory.
-
 	* If the tilde-prefix is a ~+, the value of the shell variable PWD replaces the tilde-prefix
 	* If the tilde-prefix is a ~-, the value of the shell variable OLDPWD, if it is set, is substituted.
+
 
 ``` bash
 ls ~
@@ -134,7 +135,7 @@ string=01234567890abcdefgh
 echo ${string:7}
 echo ${string: -7:2}
 ```
-* ommand substitution allows the output of a command to replace the command itself.
+* command substitution allows the output of a command to replace the command itself.
 ```bash
 $(command)
 `command`
@@ -333,7 +334,7 @@ server.listen(port, hostname, () => {
 It is possible to the a script to use a specific version of a interpreter like the python example, or let the environment decided (node js example) which interpreter will be used (usualy, its the first found in the _$PATH_ variable), the latter is the best practice.
 
 
-## Condicionals
+## Conditionals
 
 ### If,else & If else
 
@@ -528,7 +529,7 @@ Since all shell scripts are interpreted, functions must be declared, before usin
 ### Variables Scope
 Global variables are variables that can be accessed from anywhere in the script regardless of the scope.  All variables by default are defined as global, even if declared inside the function.
 
-Local variables can be declared within the function body with the _local_ keyword and can be used only inside that function.
+Local variables can be declared within the function body with the _local_ and keyword and can be used only inside that function.
 
 ``` bash
 #!/bin/bash
