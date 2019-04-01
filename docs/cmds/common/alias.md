@@ -1,9 +1,31 @@
-Title:   My Document
-Summary: A brief description of my document.
-Authors: Waylan Limberg
-         Tom Christie
-Date:    January 23, 2018
-blank-value:
-some_url: https://example.com
+Title:   Alias
+Summary: Alias Cmd
+Authors: Carlos Ortiz
+Date:    March 29, 2019
 
-This is the first paragraph of the document.
+# Alias
+ 
+ The alias utility shall create or redefine alias definitions or write the values of existing alias definitions to standard output.
+ For more infomation see [Alias](/shell/#alias)
+
+## Examples
+
+
+```bash 
+# Search Through Terminal History
+alias hs='history | grep'
+#Open file with admin access
+alias snano='sudo nano'
+#clear terminal screen
+alias c='clear'
+# Shows all open ports
+alias ports='netstat -tulanp'
+#Tail a file 
+alias t='tail -f'
+```
+
+
+## References
+
+* [Man](http://man7.org/linux/man-pages/man1/alias.1p.html)
+* [Aliases](https://www.tldp.org/LDP/abs/html/aliases.html)
