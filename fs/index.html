@@ -36,7 +36,7 @@
     
     
       
-        <title>My Document</title>
+        <title>*nix File System.</title>
       
     
     
@@ -74,6 +74,10 @@
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#the-file-system" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
     
     
       <header class="md-header" data-md-component="header">
@@ -164,7 +168,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../shell/shell/" title="Shell" class="md-nav__link">
+    <a href="../shell" title="Shell" class="md-nav__link">
       Shell
     </a>
   </li>
@@ -481,11 +485,65 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Filesystem
+      </label>
     
     <a href="./" title="Filesystem" class="md-nav__link md-nav__link--active">
       Filesystem
     </a>
     
+      
+<nav class="md-nav md-nav--secondary">
+
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+  
+
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-file-system" title="The File system" class="md-nav__link">
+    The File system
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permissons" title="Permissons" class="md-nav__link">
+    Permissons
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../references/" title="References" class="md-nav__link">
+      References
+    </a>
   </li>
 
     
@@ -496,15 +554,163 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+  
+
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-file-system" title="The File system" class="md-nav__link">
+    The File system
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permissons" title="Permissons" class="md-nav__link">
+    Permissons
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Filesystem</h1>
-                
-                <p>This is the first paragraph of the document.</p>
+                <h1 id="the-file-system">The File system<a class="headerlink" href="#the-file-system" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>&ldquo;On a UNIX system, everything is a file; if something is not a file, it is a process.&rdquo;</p>
+</blockquote>
+<p>It makes no difference between a file and a directory, since a directory is just a file containing names of other files. 
+Programs, services, texts, images, and so forth, are all files. Input and output devices, and generally all devices, are considered to be files, 
+according to the system.</p>
+<p>The <code>-l</code> option of <code>ls</code> displays the file type, using the first character of each input line</p>
+<div class="codehilite"><pre><span></span>~/d/r/m/nix_intro&gt; ls -l
+total <span class="m">12</span>
+drwxr-xr-x <span class="m">1</span> cortiz cortiz   <span class="m">86</span> Mar <span class="m">30</span> <span class="m">18</span>:11 docs/
+-rw-r--r-- <span class="m">1</span> cortiz cortiz <span class="m">1590</span> Mar <span class="m">30</span> <span class="m">11</span>:01 Makefile
+drwxr-xr-x <span class="m">1</span> cortiz cortiz   <span class="m">16</span> Mar <span class="m">30</span> <span class="m">18</span>:35 material-mod/
+-rw-r--r-- <span class="m">1</span> cortiz cortiz <span class="m">1280</span> Mar <span class="m">30</span> <span class="m">18</span>:36 mkdocs.yml
+-rw-r--r-- <span class="m">1</span> cortiz cortiz  <span class="m">244</span> Mar <span class="m">30</span> <span class="m">10</span>:51 requirements.txt
+drwxr-xr-x <span class="m">1</span> cortiz cortiz  <span class="m">148</span> Mar <span class="m">30</span> <span class="m">14</span>:51 site/
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>Regular file</td>
+</tr>
+<tr>
+<td>d</td>
+<td>Directory</td>
+</tr>
+<tr>
+<td>l</td>
+<td>Link</td>
+</tr>
+<tr>
+<td>c</td>
+<td>Special file</td>
+</tr>
+<tr>
+<td>s</td>
+<td>Socket</td>
+</tr>
+<tr>
+<td>p</td>
+<td>Named pipe</td>
+</tr>
+<tr>
+<td>b</td>
+<td>Block device</td>
+</tr>
+</tbody>
+</table>
+<h2 id="permissons">Permissons<a class="headerlink" href="#permissons" title="Permanent link">&para;</a></h2>
+<p>Each file and directory has three user based permission groups</p>
+<ul>
+<li>
+<p><strong>owner</strong> Apply only the owner of the file or directory, they will not impact the actions of other users.</p>
+</li>
+<li>
+<p><strong>group</strong> Apply only to the group that has been assigned to the file or directory, they will not effect the actions of other users.</p>
+</li>
+<li>
+<p><strong>all users</strong> - Apply to all other users on the system, <strong>this is the permission group that you want to watch the most.</strong></p>
+</li>
+</ul>
+<p>There are only 3 types of permissions:</p>
+<ul>
+<li><em>read</em>    <em>r</em>    - User&rsquo;s capability to read the contents of the file.</li>
+<li><em>write</em>   <em>w</em>   - User&rsquo;s capability to write or modify a file or directory.</li>
+<li><em>execute</em> <em>x</em> - User&rsquo;s capability to execute a file or view the contents of a directory.</li>
+</ul>
+<p>This permissions can be view, the same way we saw the file type, by using the <code>-l</code> of <code>ls</code></p>
+<div class="codehilite"><pre><span></span>~/d/r/m/nix_intro&gt; ls -l
+total <span class="m">12</span>
+drwxr-xr-x <span class="m">1</span> cortiz cortiz   <span class="m">86</span> Mar <span class="m">30</span> <span class="m">18</span>:11 docs/
+-rw-r--r-- <span class="m">1</span> cortiz cortiz <span class="m">1590</span> Mar <span class="m">30</span> <span class="m">11</span>:01 Makefile
+drwxr-xr-x <span class="m">1</span> cortiz cortiz   <span class="m">16</span> Mar <span class="m">30</span> <span class="m">18</span>:35 material-mod/
+-rw-r--r-- <span class="m">1</span> cortiz cortiz <span class="m">1280</span> Mar <span class="m">30</span> <span class="m">18</span>:36 mkdocs.yml
+-rw-r--r-- <span class="m">1</span> cortiz cortiz  <span class="m">244</span> Mar <span class="m">30</span> <span class="m">10</span>:51 requirements.txt
+drwxr-xr-x <span class="m">1</span> cortiz cortiz  <span class="m">148</span> Mar <span class="m">30</span> <span class="m">14</span>:51 site/
+</pre></div>
+
+
+<p>Where after, the file type, the first 3, are the owners permissions, the next 3 are the group permission and finally the last 3 are 
+the permissions for all the users.</p>
+<p>It&rsquo;s possible to change, permissions by using the command <code>chmod</code>  recent version of <code>chmod</code> now can accept a more graphical way to change the permissions by using chars instead of bit more.</p>
+<div class="codehilite"><pre><span></span>chmod a+wrx file
+chmod g-w file2
+chmod ug+x file3
+</pre></div>
+
+
+<p>The syntax looks like this.
+First, we specified to whom we will give permission by using
+* <em>u</em>  owner
+* <em>g</em>  group
+* <em>o</em>   others
+* <em>a</em>  all users</p>
+<p>We can define multiple affected user and groups by adding them together <code>ug</code> or <code>ag</code> for example. Then we use <code>+</code> or  <code>-</code> to add or remove permissions 
+*  <em><em>r</em></em> for read
+*  <em><em>w</em></em> for write 
+* <em><em>x</em></em> for execute  </p>
+<p>Like the recipient of the permissions, we can concardate the permission to give multiple at the same time.</p>
+<p>For more information about <code>chmod</code> check the <a href="/cmds/common/chmod">command documentation</a>, or it&rsquo;s man page <code>man chmod</code></p>
                 
                   
                 
@@ -539,6 +745,20 @@
             </div>
           </a>
         
+        
+          <a href="../references/" title="References" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                References
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
