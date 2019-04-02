@@ -1,6 +1,5 @@
 Title:   Cat 
 Summary:  concatenate files and print on the standard output
-
 Authors: Carlos Ortiz
 Date:    March 29, 2019
 

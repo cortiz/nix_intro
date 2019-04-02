@@ -18,6 +18,7 @@ nav:
         - 'alias': cmds/common/alias.md
         - 'cat': cmds/common/cat.md
         - 'cd': cmds/common/cd.md
+        - 'chmod': cmds/common/chmod.md 
         - 'clear': cmds/common/clear.md
         - 'cp': cmds/common/cp.md
         - 'date': cmds/common/date.md
