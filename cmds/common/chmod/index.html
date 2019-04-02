@@ -36,7 +36,7 @@
     
     
       
-        <title>My Document</title>
+        <title>chmod</title>
       
     
     
@@ -75,6 +75,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#chmod" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -96,7 +100,7 @@
               Rivetlogic introduction to *nix subsystems.
             </span>
             <span class="md-header-nav__topic">
-              My Document
+              chmod
             </span>
           
         </div>
@@ -174,10 +178,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Common
@@ -222,6 +228,74 @@
     <a href="../cd/" title="cd" class="md-nav__link">
       cd
     </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        chmod
+      </label>
+    
+    <a href="./" title="chmod" class="md-nav__link md-nav__link--active">
+      chmod
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+  
+
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chmod" title="chmod" class="md-nav__link">
+    chmod
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" title="Examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" title="References" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+</nav>
+    
   </li>
 
         
@@ -501,15 +575,148 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+  
+
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chmod" title="chmod" class="md-nav__link">
+    chmod
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" title="Examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" title="References" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>My Document</h1>
-                
-                <p>This is the first paragraph of the document.</p>
+                <h1 id="chmod">chmod<a class="headerlink" href="#chmod" title="Permanent link">&para;</a></h1>
+<p><code>chmod</code> changes the file mode bits of each given file
+according to mode, which can be either a symbolic representation of changes to make, or an octal number rep‐
+resenting the bit pattern for the new mode bits.</p>
+<p>A  combination  of  the  letters <em>ugoa</em> controls which users&rsquo; access to the file will be changed: the user who
+owns it (<em>u</em>), other users in the file&rsquo;s group (<em>g</em>), other users not in the file&rsquo;s group (<em>o</em>), or all users (<em>a</em>).</p>
+<p>If  none  of these are given, the effect is as if (<em>a</em>) were given, but bits that are set in the umask are not
+affected.</p>
+<p>The operator <em>+</em> causes the selected file mode bits to be added to the existing file mode bits of each file; <em>-</em> causes  them  to  be removed;</p>
+<p>The letters <em>rwxXst</em> select file mode bits for the affected users: read (<em>r</em>), write (<em>w</em>), execute (or search for
+directories)  (<em>x</em>), execute/search only if the file is a directory or already has execute permission for some
+user (<em>X</em>), set user or group ID on execution (<em>s</em>), restricted deletion flag or sticky bit (<em>t</em>).</p>
+<p>A  numeric mode is from one to four octal digits (0-7), derived by adding up the bits with values 4, 2, and 1
+<strong>Omitted digits are assumed to be leading zeros.</strong></p>
+<p>The first digit selects the set user  ID  (4)  and  set
+group ID (2) and restricted deletion or sticky (1) attributes.</p>
+<p>The second digit selects permissions for the
+user who owns the file: read (4), write (2), and execute (1); the third selects permissions for other  users
+in  the file&rsquo;s group, with the same values; and the fourth for other users not in the file&rsquo;s group, with the
+same values.</p>
+<table>
+<thead>
+<tr>
+<th>Binary</th>
+<th>Octal</th>
+<th>Perms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>000</td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>001</td>
+<td>&ndash;x</td>
+</tr>
+<tr>
+<td>2</td>
+<td>010</td>
+<td>-w-</td>
+</tr>
+<tr>
+<td>3</td>
+<td>011</td>
+<td>-wx</td>
+</tr>
+<tr>
+<td>4</td>
+<td>100</td>
+<td>r&ndash;</td>
+</tr>
+<tr>
+<td>5</td>
+<td>101</td>
+<td>rw</td>
+</tr>
+<tr>
+<td>6</td>
+<td>111</td>
+<td>rwx</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>chmod never changes the permissions of symbolic links</p>
+<p>This  is  not  a problem since the permissions of symbolic links are never used</p>
+</div>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<p>Change permissions output a diagnostic for every file processed</p>
+<div class="codehilite"><pre><span></span>chmod -v <span class="m">0666</span> myFolder
+</pre></div>
+
+
+<p>Change permission to multiples users and groups at the same time</p>
+<div class="codehilite"><pre><span></span> chmod <span class="nv">u</span><span class="o">=</span>rwe,g<span class="o">=</span>rw,o-rwx hello.txt
+</pre></div>
+
+
+<p>Change permissions and write </p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://man7.org/linux/man-pages/man1/chmod.1.html">Man</a></li>
+</ul>
                 
                   
                 
@@ -526,6 +733,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../cd/" title="cd" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                cd
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../clear/" title="clear" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                clear
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
