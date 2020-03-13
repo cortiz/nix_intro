@@ -5,7 +5,13 @@ Date:    March 29, 2019
 
 # clear
 
-Clears your screen if this is possible, including its scrollback buffer clear writes to the standard output.
+Clears your screen if this is possible, including its scrollback buffer cl
+
+## Synopsis
+
+``` bash
+clear [-Ttype] [-V] [-x]
+```
 
 ## Examples
 

@@ -50,6 +50,14 @@ same values.
 
 	This  is  not  a problem since the permissions of symbolic links are never used
 
+## Synopsis
+
+``` bash
+chmod [OPTION]... MODE[,MODE]... FILE...
+chmod [OPTION]... OCTAL-MODE FILE...
+chmod [OPTION]... --reference=RFILE FILE...
+```
+
 ## Examples
 
 Change permissions output a diagnostic for every file processed

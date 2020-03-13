@@ -8,6 +8,15 @@ Date:    March 29, 2019
  The alias utility shall create or redefine alias definitions or write the values of existing alias definitions to standard output.
  For more infomation see [Alias](/shell/#alias)
 
+
+## Synopsis
+
+``` bash
+alias
+alias [OPTIONS] NAME DEFINITION
+alias [OPTIONS] NAME=DEFINITION
+```
+
 ## Examples
 
 

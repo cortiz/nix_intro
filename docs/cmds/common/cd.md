@@ -13,9 +13,10 @@ The cd  command shall change the working directory of the current shell executio
 
 3.  When a <hyphen> (-) is used as the operand, this shall be equivalent to the command:
 
+## Synopsis
 
-```bash
- 	cd "$OLDPWD" && pwd
+``` bash
+cd [DIRECTORY]
 ```
 
 ## Examples

@@ -7,6 +7,12 @@ Date:    March 29, 2019
 
 Concatenate files and print on the standard output
 
+## Synopsis
+
+``` bash
+cat [OPTION]... [FILE]...
+```
+
 ## Examples
 
 ```bash 
