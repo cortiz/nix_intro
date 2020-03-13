@@ -36,7 +36,7 @@
     
     
       
-        <title>My Document</title>
+        <title>cp</title>
       
     
     
@@ -74,6 +74,10 @@
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#cp" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
     
     
       <header class="md-header" data-md-component="header">
@@ -262,10 +266,66 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        cp
+      </label>
     
     <a href="./" title="cp" class="md-nav__link md-nav__link--active">
       cp
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+  
+
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cp" title="cp" class="md-nav__link">
+    cp
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synopsis" title="Synopsis" class="md-nav__link">
+    Synopsis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" title="Examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" title="References" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+</nav>
     
   </li>
 
@@ -522,15 +582,117 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+  
+
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cp" title="cp" class="md-nav__link">
+    cp
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synopsis" title="Synopsis" class="md-nav__link">
+    Synopsis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" title="Examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" title="References" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>cp</h1>
-                
-                <p>This is the first paragraph of the document.</p>
+                <h1 id="cp">cp<a class="headerlink" href="#cp" title="Permanent link">&para;</a></h1>
+<p>Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.</p>
+<h2 id="synopsis">Synopsis<a class="headerlink" href="#synopsis" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span>cp <span class="o">[</span>OPTION<span class="o">]</span>... <span class="o">[</span>-T<span class="o">]</span> SOURCE DEST
+cp <span class="o">[</span>OPTION<span class="o">]</span>... SOURCE... DIRECTORY
+cp <span class="o">[</span>OPTION<span class="o">]</span>... -t DIRECTORY SOURCE...
+</pre></div>
+
+
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<p>Copy file to the other folder</p>
+<div class="codehilite"><pre><span></span>cp ~/myFile.txt /tmp/myFile.txt
+</pre></div>
+
+
+<p>Copy a folder to and another folder</p>
+<div class="codehilite"><pre><span></span>cp -r ~/myFolder /tmp/myFolder
+</pre></div>
+
+
+<p>Copy a folder to and another folder and show information</p>
+<div class="codehilite"><pre><span></span>cp -rv ~/myFolder /tmp/myFolder
+</pre></div>
+
+
+<p>Copy a folder to and another but <em>do not</em> override existing files</p>
+<div class="codehilite"><pre><span></span>cp -rn ~/myFolder /tmp/myFolder
+</pre></div>
+
+
+<p>Copy only when the SOURCE file is newer than the destination file or when the destination file is missing</p>
+<div class="codehilite"><pre><span></span>cp -ru ~/myFolder /tmp/myFolder
+</pre></div>
+
+
+<p>Copy to an specific directory </p>
+<div class="codehilite"><pre><span></span>cp -t DEST SOURCE SOURCE <span class="m">2</span> SOURCE <span class="m">3</span>
+</pre></div>
+
+
+<p>Copy and preserve the specified attributes(mode,ownership,timestamps),  if possible additional attributes: context, links, xattr, all</p>
+<div class="codehilite"><pre><span></span>cp -p SOURCE DEST
+</pre></div>
+
+
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://man7.org/linux/man-pages/man1/cp.1.html">Man</a></li>
+</ul>
                 
                   
                 
