@@ -40,6 +40,10 @@ Like in C and Java, data can support formatting the output/input date from a Str
 * %m     month (01..12)
 * %M     minute (00..59)
 
+!!! Warning
+
+    There are breaking differences between the arguments between Plan9/Unix/macOS and GNU `date` command consider this when
+    writing portable scripts
 
 ## Examples
 
